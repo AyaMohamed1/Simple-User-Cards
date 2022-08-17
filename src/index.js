@@ -1,17 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Cards from "./pages/Cards";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+class App extends React.Component {
+  state = { data: [] };
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          // console.log(result);
+          this.setState({ data: result });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  deleteUser(index) {
+    let newState = this.state.data.splice(index, 1);
+    console.log(newState);
+  }
+
+  render() {
+    if (this.state == "undefined") {
+      return <h1>Loading...</h1>;
+    } else {
+      return (
+        <div>
+          <Cards data={this.state.data} />
+        </div>
+      );
+    }
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector("#root"));
