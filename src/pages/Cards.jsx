@@ -1,6 +1,5 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Card from "../components/Card";
 function Cards(props) {
   console.log("Hello in Cards");
@@ -9,9 +8,8 @@ function Cards(props) {
     <Container>
       <Row gap={2}>
         {props.data.map((user, index) => (
-          <Card key={index} user={user} />
+          <Card key={index} id={index} user={user} onDelete={props.onDelete} />
         ))}
-        ;
       </Row>
     </Container>
   );

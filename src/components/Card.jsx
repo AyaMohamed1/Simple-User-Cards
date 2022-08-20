@@ -14,7 +14,14 @@ function UserCard(props) {
         <Card.Body>
           <Card.Title>{props.user.name}</Card.Title>
           <Card.Text>{props.user.email}</Card.Text>
-          <Button variant="danger">Delete</Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              props.onDelete(props.id);
+            }}
+          >
+            Delete
+          </Button>
         </Card.Body>
       </Card>
     </Col>

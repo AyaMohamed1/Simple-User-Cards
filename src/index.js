@@ -20,18 +20,21 @@ class App extends React.Component {
       );
   }
 
-  deleteUser(index) {
-    let newState = this.state.data.splice(index, 1);
+  deleteUser = (index) => {
+    console.log(index);
+    let newState = [...this.state.data];
+    newState.splice(index, 1);
     console.log(newState);
-  }
+    this.setState({ data: newState });
+  };
 
   render() {
-    if (this.state == "undefined") {
+    if (this.state.data === "undefined") {
       return <h1>Loading...</h1>;
     } else {
       return (
         <div>
-          <Cards data={this.state.data} />
+          <Cards data={this.state.data} onDelete={this.deleteUser} />
         </div>
       );
     }
